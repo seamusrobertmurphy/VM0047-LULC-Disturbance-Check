@@ -1,13 +1,3 @@
----
-title: "VM0047-LULC-Disturbance-Check"
-author: "Murphy, S."
-date: "2024-10-17"
-output:
-  html_document:
-    keep_md: yes
----
-
-
 
 # Environment Setup
 
@@ -56,4 +46,3 @@ tm_shape(st_geometry(aoi)) +
   tm_compass(position = c("left", "top"), size = 2)
 ```
 
-preserve51366f06fcde3f50

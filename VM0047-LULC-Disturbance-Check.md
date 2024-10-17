@@ -2,9 +2,9 @@
 title: "VM0047-LULC-Disturbance-Check"
 author: "Murphy, S."
 date: "2024-10-17"
-output:
+output: 
   html_document:
-    keep_md: yes
+    keep_md: TRUE
 ---
 
 
@@ -21,13 +21,13 @@ requirements <- c(
   "s2", "gdalcubes", "rsat", "latex2exp", "readxl", "magrittr", "janitor", 
   "dplyr", "RColorBrewer", "psych", "tmap", "useful", "caret", "tibble", 
   "DescTools", "animation", "ModelMetrics", "knitr", "kableExtra", "basemaps", 
-  "htmltools", "gtsummary", "data.table")
+  "htmltools", "gtsummary", "data.table", "styler")
 
 # derive function to check & load
 setup <- function(requirements){
   missing.packages <- requirements[!(requirements %in% installed.packages()[,"Package"])];
     if(length(missing.packages)) {
-        install.packages(missing.packages);
+        install.packages(missing.packages, repos = "https://cloud.r-project.org/");
     }
     for(package_name in requirements){
         library(package_name,character.only=TRUE,quietly=TRUE);
@@ -47,13 +47,10 @@ The shapefile of this task's area of interest is loaded as follows.
 
 ``` r
 tmap::tmap_mode("view")
-tmap_options(check.and.fix = T)
+tmap::tmap_options(check.and.fix = T)
 
 aoi = read_sf("./test-polygon/test polygon.shp") 
-tm_shape(st_geometry(aoi)) + 
-  tm_borders(col="red") +
-  tm_scale_bar(position = c("left", "bottom"), width = 0.15) +
-  tm_compass(position = c("left", "top"), size = 2)
+tmap_leaflet(tm_shape(aoi) + tm_polygons())
 ```
 
-preserve51366f06fcde3f50
+preserve6a204578cc1e2b98
